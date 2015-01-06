@@ -1,0 +1,39 @@
+{
+  "name": "twtr-dvr",
+  "version": "1.0.0",
+  "description": "delay a live tweet from twitter",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.10.0",
+    "express": "^4.10.6",
+    "express-session": "^1.9.3",
+    "jsonwebtoken": "^3.2.0",
+    "jwt-simple": "^0.2.0",
+    "moment": "^2.8.4",
+    "mongoose": "^3.8.21",
+    "node-twitter-api": "^1.5.0",
+    "passport": "^0.2.1",
+    "passport-http": "^0.2.2",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brownsf/twitterDVR.git"
+  },
+  "keywords": [
+    "nodejs",
+    "angular",
+    "twitter"
+  ],
+  "author": "brownsf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brownsf/twitterDVR/issues"
+  },
+  "homepage": "https://github.com/brownsf/twitterDVR"
+}
