@@ -1,28 +1,37 @@
-// Load required packages
-var passport = require('passport');
-var BasicStrategy = require('passport-http').BasicStrategy;
+var jwt = require('jwt-simple');
 var User = require('../models/user');
+exports.isAuthenticated = function (req, res, next) {
+  var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
 
-passport.use(new BasicStrategy(
-  function(username, password, callback) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return callback(err); }
+  if(token == 'undefined'){
 
-      // No user found with that username
-      if (!user) { return callback(null, false); }
 
-      // Make sure the password is correct
-      user.verifyPassword(password, function(err, isMatch) {
-        if (err) { return callback(err); }
+    res.end('Access token has expired', 400);
 
-        // Password did not match
-        if (!isMatch) { return callback(null, false); }
-
-        // Success
-        return callback(null, user);
-      });
-    });
   }
-));
+  console.log(token);
+  if (token) {
+    var decoded = jwt.decode(token, global.jwtsecert);
+      if (decoded.exp <= Date.now()) {
+          res.end('Access token has expired', 400);
+      }
+      User.findById(decoded.iss, function(err, user) {
+        if(err)
+          console.log(err);
+        if(user) {
 
-exports.isAuthenticated = passport.authenticate('basic', { session : false });
+          if(user ==null){
+            res.end('Access token has expired', 400);
+          }
+
+          req.user = user;
+            next(null,user);
+        }else{
+          res.end('Access token has expired', 400);
+        }
+      });
+  } else {
+    next();
+  }
+
+}

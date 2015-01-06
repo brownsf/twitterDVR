@@ -1,0 +1,21 @@
+<h2>Choose Timeline</h2>
+<form ng-submit="setFollow()">
+    <div class="form-group">
+        <label for="startTime">Start TIme</label>
+        <input type="text" name="startTime" id="startTime" class="form-control" ng-model="startTime" required>
+    </div>
+    <div class="form-group">
+        <label for="endTime">End TIme</label>
+        <input type="text" name="endTime" id="endTime" class="form-control" ng-model="endTime" required>
+    </div>
+    {{following.length}}
+    <ul ng-repeat="user in following" class="list-unstyled">
+        <li>
+            <div class="checkbox"><img src="{{user.profile_image_url}}"/><label><input type="checkbox" ng-model="ids[$index]" value="{{user.id}}">{{user.name}}</label>
+        </li>
+    </ul>
+
+    <button type="button" ng-click="moreFollowing()" ng-show="cursor != null">Next</button>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

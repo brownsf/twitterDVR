@@ -2,6 +2,23 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
+
+var FollowerListSchema = new mongoose.Schema({
+  followList:{
+    type: [Number],
+    required:false
+
+  },
+  begin:{
+    type:Date,
+    required:false
+  },
+  end:{
+    type:Date,
+    required:false
+  }
+});
+
 // Define our user schema
 var UserSchema = new mongoose.Schema({
   username: {
@@ -13,9 +30,17 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  access_token:{
+  accessToken:{
     type: String,
     required: false
+  },
+  accessTokenSecret:{
+    type:String,
+    required:false
+  },
+  followList:[FollowerListSchema],
+  token:{
+    type:String
   }
 });
 
